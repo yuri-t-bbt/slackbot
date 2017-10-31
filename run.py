@@ -11,17 +11,19 @@ def main():
 @respond_to('pulls')
 def github_pullreq(message):
     github_token = os.getenv("GITHUB_TOKEN", "")
+    github_repos = os.getenv("GITHUB_REPOS")
+    github_org = os.getenv("GITHUB_ORG")
     if len(github_token) == 0:
         message.reply('Sorry, app error...')
     g = Github(github_token, api_preview=True)
-    org = g.get_organization('bbtinc')
-    targets = ("portal", "portalapi", "texas", "mypage", "accontent")
+    org = g.get_organization(github_org)
+    targets = github_repos.split(',')
     say = '\n'
     for target in targets:
         repo = org.get_repo(target)
-        pulls = [(pull.title, pull.url) for pull in repo.get_pulls()]
+        pulls = [pull for pull in repo.get_pulls()]
         if len(pulls) > 0:
-            say += '{0}:\n{1}\n\n'.format(target, '\n'.join([' - {0} {1}'.format(p[0],p[1]) for p in pulls]))
+            say += '{0}:\n{1}\n\n'.format(target, '\n'.join([' - {0} {1}'.format(p.title, p.html_url) for p in pulls]))
         else:
             say += '{0}: Nothing.\n\n'.format(target)
     message.reply(say)
