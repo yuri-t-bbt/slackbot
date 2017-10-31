@@ -1,6 +1,8 @@
 import os
 
 DEFAULT_REPLY = u"""
+使い方
+
 [Command]
 pulls プルリクエスト一覧を取得する
 """

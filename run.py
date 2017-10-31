@@ -1,12 +1,24 @@
 # coding: utf-8
 import os
+import re
 from slackbot.bot import Bot
 from slackbot.bot import respond_to
 from github import Github
+import psycopg2
 
 def main():
     bot = Bot()
     bot.run()
+
+
+def get_connection():
+    database_uri = github_token = os.getenv("DATABASE_URL", "")
+    m = re.search(r'postgres://([a-z]+):([\.\-_a-zA-Z0-9]+)@([\.\-_a-zA-Z0-9]+):([0-9]+)/([a-zA-Z0-9]+)', database_uri)
+    user, password, hostname, port, database = m.group(1), m.group(2), m.group(3), m.group(4), m.group(4)
+    return psycopg2.connect("host={0} port={1} dbname={2} user={3} password={4}".format(
+        hostname, port, database, user, password
+    ))
+
 
 @respond_to('pulls')
 def github_pullreq(message):
@@ -27,6 +39,11 @@ def github_pullreq(message):
         else:
             say += '{0}: Nothing.\n\n'.format(target)
     message.reply(say)
+
+
+@respond_to(r'(.*)\+\+')
+def good(message, target):
+
 
 
 if __name__ == '__main__':
