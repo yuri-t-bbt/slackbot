@@ -23,11 +23,11 @@ git push heroku HEAD
 ### 起動コマンド
 
 ```
-heroku ps:scale portalbot=1
+heroku ps:scale {{Herokuサービス名}}=1
 ```
 
 ### 停止コマンド
 
 ```
-heroku ps:scale portalbot=0
+heroku ps:scale {{Herokuサービス名}}=0
 ```
