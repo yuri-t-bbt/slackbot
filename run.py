@@ -40,11 +40,5 @@ def github_pullreq(message):
             say += '{0}: Nothing.\n\n'.format(target)
     message.reply(say)
 
-
-@respond_to(r'(.*)\+\+')
-def good(message, target):
-
-
-
 if __name__ == '__main__':
     main()
