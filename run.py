@@ -3,6 +3,7 @@ import os
 import re
 from slackbot.bot import Bot
 from slackbot.bot import respond_to
+from slackbot.bot import listen_to
 from github import Github
 import psycopg2
 
@@ -39,6 +40,12 @@ def github_pullreq(message):
         else:
             say += '{0}: Nothing.\n\n'.format(target)
     message.reply(say)
+
+
+@listen_to('lgtm')
+def neko_lgtm(message):
+    message.send('https://lh6.googleusercontent.com/MqtR2yK6E5AzcV_tjEPfgZZUAkynpbm4y_X6BMOuOrIkMdArPf_SQpazErGu9Gfq2eK8smfPmhwZjDR_2QPi=w1514-h699')
+
 
 if __name__ == '__main__':
     main()
