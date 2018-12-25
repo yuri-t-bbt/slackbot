@@ -67,7 +67,7 @@ def backlog_issues(message):
         message.reply(say)
     else:
         # error!!
-        message.reply("backlog api error!!")
+        message.reply("backlog api error!! {0}".format(response.status_code))
 
 
 #@respond_to('neko')
