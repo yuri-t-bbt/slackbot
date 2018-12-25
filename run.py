@@ -50,24 +50,19 @@ def backlog_issues(message):
     backlog_key = os.getenv("BACKLOG_API", "")
     url = 'https://bbt757.backlog.com/api/v2/issues?&apiKey={0}&projectId[]=18268&statusId[]=1&statusId[]=2&statusId[]=3&createdUserId[]=86613'.format(backlog_key)
     response = requests.get(url)
-    if (response.status_code % 100) == 2:
-        # Success
-        say = '\n'
-        issues = json.loads(response.text)
-        for issue in issues:
-            summary = issue['summary']
-            issueKey = issue['issueKey']
-            status_name = issue['status']['name']
-            priority_name = issue['priority']['name']
-            create_date = issue['created']
-            due_date = issue['dueDate']
-            issue_type = issue['issueType']['name']
-            url = 'https://bbt757.backlog.com/view/' + issueKey
-            say += '[{0}][{1}] {2} {3} {4} 期限：{5}\n'.format(status_name, priority_name, issue_type, summary, url, due_date)
-        message.reply(say)
-    else:
-        # error!!
-        message.reply("backlog api error!! {0}".format(response.status_code))
+    say = '\n'
+    issues = json.loads(response.text)
+    for issue in issues:
+        summary = issue['summary']
+        issueKey = issue['issueKey']
+        status_name = issue['status']['name']
+        priority_name = issue['priority']['name']
+        create_date = issue['created']
+        due_date = issue['dueDate']
+        issue_type = issue['issueType']['name']
+        url = 'https://bbt757.backlog.com/view/' + issueKey
+        say += '[{0}][{1}] {2} {3} {4} 期限：{5}\n'.format(status_name, priority_name, issue_type, summary, url, due_date)
+    message.reply(say)
 
 
 #@respond_to('neko')
