@@ -48,7 +48,7 @@ def github_pullreq(message):
 @respond_to('backlog')
 def backlog_issues(message):
     backlog_key = os.getenv("BACKLOG_API", "")
-    url = 'https://bbt757.backlog.com/api/v2/issues?&apiKey={0}&projectId[]=18268&statusId[]=1&statusId[]=2&statusId[]=3&createdUserId[]=86613'.format(backlog_key)
+    url = 'https://bbt757.backlog.com/api/v2/issues?&apiKey={0}&projectId[]=18268&statusId[]=1&statusId[]=2&statusId[]=3&issueTypeId[]=81805'.format(backlog_key)
     response = requests.get(url)
     say = '\n'
     issues = json.loads(response.text)

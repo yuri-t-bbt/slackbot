@@ -8,6 +8,7 @@
 | GITHUB_TOKEN(必須) | githubのAPIトークンを設定 |
 | GITHUB_REPOS(必須) | 表示したいリポジトリ(カンマ区切りで複数) |
 | GITHUB_ORG(必須) | 組織名を設定 |
+| BACKLOG_API(必須) | backlogのAPIキーを設定 |
 
 
 ## Herokuへのアップロード
