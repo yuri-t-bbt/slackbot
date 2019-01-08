@@ -49,12 +49,12 @@ def github_pullreq(message):
 def backlog_issues(message):
     backlog_key = os.getenv("BACKLOG_API", "")
     params=(('ポータル', 18268, 81805), ('社内サポート', 17616, 86880))
-    say = '\n'
+    say = ''
     for param in params:
         url = 'https://bbt757.backlog.com/api/v2/issues?&apiKey={0}&projectId[]={1}&statusId[]=1&statusId[]=2&statusId[]=3&issueTypeId[]={2}'.format(
             backlog_key, param[1], param[2]
         )
-        say += '[{0}]\n'.format(param[0])
+        say += '\n\n【{0}】\n'.format(param[0])
         response = requests.get(url)
         issues = json.loads(response.text)
         for issue in issues:
