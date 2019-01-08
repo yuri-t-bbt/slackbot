@@ -52,9 +52,9 @@ def backlog_issues(message):
     say = '\n'
     for param in params:
         url = 'https://bbt757.backlog.com/api/v2/issues?&apiKey={0}&projectId[]={1}&statusId[]=1&statusId[]=2&statusId[]=3&issueTypeId[]={2}'.format(
-            backlog_key, params[1], params[2]
+            backlog_key, param[1], param[2]
         )
-        say += '[{0}]\n'.format(params[0])
+        say += '[{0}]\n'.format(param[0])
         response = requests.get(url)
         issues = json.loads(response.text)
         for issue in issues:
